@@ -2,7 +2,7 @@
 
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 
 export default function VerifyEmailPage() {
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
@@ -49,21 +49,23 @@ export default function VerifyEmailPage() {
       >
         <h2 className="text-2xl font-bold mb-6 text-center">Verify Email</h2>
         <p className="text-sm text-gray-600 mb-4 text-center">
-          We've sent a 6-digit code to your email. Please enter it below.
+          We&apos;ve sent a 6-digit code to your email. Please enter it below.
         </p>
 
         <div className="flex justify-between mb-6 space-x-2">
-          {code.map((_, index) => (
-            <input
-              key={index}
-              type="text"
-              maxLength={1}
-              className="w-12 h-12 text-center text-xl border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-              onChange={(e) => handleChange(index, e.target.value)}
-              onPaste={handlePaste}
-              ref={(el) => (inputRefs.current[index] = el)}
-            />
-          ))}
+        {code.map((_, index) => (
+  <input
+    key={index}
+    type="text"
+    maxLength={1}
+    className="w-12 h-12 text-center text-xl border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+    onChange={(e) => handleChange(index, e.target.value)}
+    onPaste={handlePaste}
+    ref={(el) => {
+      inputRefs.current[index] = el;
+    }}
+  />
+))}
         </div>
 
         <button
